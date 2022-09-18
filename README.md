@@ -1,24 +1,7 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Sistema de Galpões e Estoque  
 
-Things you may want to cover:
+Projeto criado para acompanhar as aulas do TREINADEV, uma abordagem prática com TDD (Test-driven development/Desenvolvimento guiado por testes) com Ruby on Rails
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+* Versão Ruby: 3.1.2
