@@ -61,6 +61,11 @@ RSpec.describe Warehouse, type: :model do
                                   city: 'Rio', area: '1000', description: 'Descrição')
         expect(warehouse.valid?).to eq false
       end
+      it 'false when code has invalid format' do
+        warehouse = Warehouse.new(name: 'Rio', code: 'rj', address: 'Endereço', cep: '25000-000', 
+                                  city: 'Rio', area: '1000', description: 'Descrição')
+        expect(warehouse.valid?).to eq false
+      end
     end
   end
 end
