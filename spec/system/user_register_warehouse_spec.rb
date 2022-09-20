@@ -13,6 +13,7 @@ describe 'Usuário cadastra um galpão' do
     expect(page).to have_field('CEP')
     expect(page).to have_field('Área')
   end
+
   it 'com sucesso' do
     visit root_path
     click_on 'Cadastrar Galpão'
@@ -26,8 +27,20 @@ describe 'Usuário cadastra um galpão' do
     click_on 'Enviar'
 
     expect(current_path).to eq root_path
+    expect(page).to have_content 'Galpão cadastrado com sucesso'
     expect(page).to have_content 'Rio'
     expect(page).to have_content 'Rio de Janeiro'
     expect(page).to have_content '32000 m²'
+  end
+
+  it 'com dados incompletos' do 
+    visit root_path
+    click_on 'Cadastrar Galpão'
+    fill_in 'Nome', with: ''
+    fill_in 'Descrição', with: ''
+    fill_in 'Código', with: ''
+    click_on 'Enviar'
+
+    expect(page).to have_content 'Galpão não cadastrado'
   end
 end
