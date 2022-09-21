@@ -24,7 +24,7 @@ describe 'Usuário cadastra um galpão' do
     fill_in 'Cidade', with: 'Rio de Janeiro'
     fill_in 'CEP', with: '20100-000'
     fill_in 'Área', with: '32000'
-    click_on 'Enviar'
+    click_on 'Criar Galpão'
 
     expect(current_path).to eq root_path
     expect(page).to have_content 'Galpão cadastrado com sucesso'
@@ -39,8 +39,41 @@ describe 'Usuário cadastra um galpão' do
     fill_in 'Nome', with: ''
     fill_in 'Descrição', with: ''
     fill_in 'Código', with: ''
-    click_on 'Enviar'
+    click_on 'Criar Galpão'
 
     expect(page).to have_content 'Galpão não cadastrado'
+    expect(page).to have_content 'Nome não pode ficar em branco'
+    expect(page).to have_content 'Código não pode ficar em branco'
+    expect(page).to have_content 'Cidade não pode ficar em branco'
+    expect(page).to have_content 'Descrição não pode ficar em branco'
+    expect(page).to have_content 'Endereço não pode ficar em branco'
+    expect(page).to have_content 'CEP não pode ficar em branco'
+    expect(page).to have_content 'Área não pode ficar em branco'
+  end
+
+  it 'com dado exclusivo que já está em uso' do 
+    Warehouse.create(name: 'Rio', code: 'SDU', city: 'Rio de Janeiro', area: 60_000,
+    address: 'Avenida do Museu do Amanhã, 1000', cep: '20100-000',
+    description: 'Galpão da zona portuária do Rio')
+
+    visit root_path
+    click_on 'Cadastrar Galpão'
+    fill_in 'Nome', with: 'Rio'
+    fill_in 'Código', with: 'SDU'
+    click_on 'Criar Galpão'
+
+    expect(page).to have_content 'Nome já está em uso'
+    expect(page).to have_content 'Código já está em uso'
+  end
+
+  it 'com dados inválidos' do 
+    visit root_path
+    click_on 'Cadastrar Galpão'
+    fill_in 'Código', with: 'Rj'
+    fill_in 'CEP', with: '25000'
+    click_on 'Criar Galpão'
+
+    expect(page).to have_content 'Código não é válido'
+    expect(page).to have_content 'CEP não é válido'
   end
 end

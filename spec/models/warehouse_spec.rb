@@ -57,7 +57,7 @@ RSpec.describe Warehouse, type: :model do
     end
     context 'format' do 
       it 'false when zip code has invalid format' do
-        warehouse = Warehouse.new(name: 'Rio', code: 'RIO', address: 'Endereço', cep: '25000abc', 
+        warehouse = Warehouse.new(name: 'Rio', code: 'RIO', address: 'Endereço', cep: '25000', 
                                   city: 'Rio', area: '1000', description: 'Descrição')
         expect(warehouse.valid?).to eq false
       end
