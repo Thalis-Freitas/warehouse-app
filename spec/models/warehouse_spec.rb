@@ -41,18 +41,14 @@ RSpec.describe Warehouse, type: :model do
     end
     context 'uniqueness' do 
       it 'false when code is already in use' do 
-        first_warehouse = Warehouse.create(name: 'Rio', code: 'RIO', address: 'Endereço', cep: '25000-000', 
-                                           city: 'Rio', area: 1000, description: 'Alguma descrição')
-        second_warehouse = Warehouse.new(name: 'Niteroi', code: 'RIO', address: 'Avenida', cep: '20000-000', 
-                                         city: 'Niteroi', area: 11000, description: 'Outra descrição')
-        expect(second_warehouse.valid?).to eq false
+        warehouse = Warehouse.new(name: 'Aeroporto de SP', code: 'GRU', address: 'Avenida', cep: '20000-000', 
+                                         city: 'São Paulo', area: 11000, description: 'Outra descrição')
+        expect(warehouse.valid?).to eq false
       end
       it 'false when name is already in use' do 
-        first_warehouse = Warehouse.create(name: 'Rio', code: 'RIO', address: 'Endereço', cep: '25000-000', 
-                                           city: 'Rio', area: 1000, description: 'Alguma descrição')
-        second_warehouse = Warehouse.new(name: 'Rio', code: 'NTR', address: 'Avenida', cep: '20000-000', 
-                                         city: 'Niteroi', area: 11000, description: 'Outra descrição')
-        expect(second_warehouse.valid?).to eq false
+        warehouse = Warehouse.new(name: 'Aeroporto SP', code: 'ASP', address: 'Avenida', cep: '20000-000', 
+                                         city: 'São Paulo', area: 11000, description: 'Outra descrição')
+        expect(warehouse.valid?).to eq false
       end
     end
     context 'format' do 

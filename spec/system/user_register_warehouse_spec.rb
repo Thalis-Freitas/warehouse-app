@@ -52,14 +52,10 @@ describe 'Usuário cadastra um galpão' do
   end
 
   it 'com dado exclusivo que já está em uso' do 
-    Warehouse.create(name: 'Rio', code: 'SDU', city: 'Rio de Janeiro', area: 60_000,
-    address: 'Avenida do Museu do Amanhã, 1000', cep: '20100-000',
-    description: 'Galpão da zona portuária do Rio')
-
     visit root_path
     click_on 'Cadastrar Galpão'
-    fill_in 'Nome', with: 'Rio'
-    fill_in 'Código', with: 'SDU'
+    fill_in 'Nome', with: 'Aeroporto SP'
+    fill_in 'Código', with: 'GRU'
     click_on 'Criar Galpão'
 
     expect(page).to have_content 'Nome já está em uso'
