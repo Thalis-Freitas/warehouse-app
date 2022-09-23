@@ -1,7 +1,10 @@
 class WarehousesController < ApplicationController
-  before_action :set_warehouse, only:[:show, :edit, :update]
+  before_action :set_warehouse, only:[:show, :edit, :update, :destroy]
 
-  def show; end
+  def show
+    formatted_cep @warehouse
+    @warehouse[:code].upcase!
+  end
 
   def new
     @warehouse = Warehouse.new
@@ -20,12 +23,22 @@ class WarehousesController < ApplicationController
   def edit; end
 
   def update 
-    if @warehouse.update(warehouse_params)
-      redirect_to warehouse_path(@warehouse), notice: 'Galpão atualizado com sucesso'
-    else
-      flash.now[:notice] = 'Não foi possível atualizar o galpão'
+    if @warehouse[:name] == warehouse_params[:name] && @warehouse[:description] == warehouse_params[:description] && @warehouse[:code] == warehouse_params[:code] && @warehouse[:city] == warehouse_params[:city] && @warehouse[:address] == warehouse_params[:address] && @warehouse[:cep] == warehouse_params[:cep] && "#{@warehouse[:area]}" == "#{warehouse_params[:area]}"
+      flash.now[:notice] = 'Nenhuma modificação encontrada'
       render :edit
+    else
+      if @warehouse.update(warehouse_params) 
+        redirect_to warehouse_url(@warehouse), notice: 'Galpão atualizado com sucesso'
+      else
+        flash.now[:notice] = 'Não foi possível atualizar o galpão'
+        render :edit
+      end
     end
+  end
+
+  def destroy 
+    @warehouse.destroy  
+    redirect_to root_url, notice: 'Galpão removido com sucesso'
   end
 
   private
@@ -38,4 +51,8 @@ class WarehousesController < ApplicationController
     params.require(:warehouse).permit(:name, :code, :city, :description, :address,
                                       :cep, :area)
   end
+
+  def formatted_cep(warehouse)
+    warehouse[:cep].insert(5, '-') if warehouse[:cep].length == 8 
+  end 
 end

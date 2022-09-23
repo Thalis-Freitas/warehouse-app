@@ -1,5 +1,4 @@
 require 'rails_helper'
-Rails.application.load_seed
 
 describe 'Usuário edita um galpão' do  
   it 'a partir da página de detalhes' do
@@ -8,13 +7,13 @@ describe 'Usuário edita um galpão' do
     click_on 'Editar'
 
     expect(page).to have_content 'Editar Galpão'
-    expect(page).to have_field('Nome', with: 'Aeroporto SP')
-    expect(page).to have_field('Descrição', with: 'Galpão destinado para cargas internacionais')
-    expect(page).to have_field('Código', with: 'GRU')
-    expect(page).to have_field('Cidade', with: 'Guarulhos')
-    expect(page).to have_field('Endereço', with: 'Avenida do Aeroporto, 1000')
-    expect(page).to have_field('CEP', with: '15000-000')
-    expect(page).to have_field('Área', with: 100000, type: 'number')
+    expect(page).to have_field 'Nome', with: 'Aeroporto SP'
+    expect(page).to have_field 'Descrição', with: 'Galpão destinado para cargas internacionais'
+    expect(page).to have_field 'Código', with: 'GRU'
+    expect(page).to have_field 'Cidade', with: 'Guarulhos'
+    expect(page).to have_field 'Endereço', with: 'Avenida do Aeroporto, 1000'
+    expect(page).to have_field 'CEP', with: '15000-000'
+    expect(page).to have_field 'Área', with: '100000', type: 'number'
   end
 
   it 'com sucesso' do 
@@ -27,7 +26,8 @@ describe 'Usuário edita um galpão' do
     click_on 'Editar'
     fill_in 'Nome', with: 'Galpão de Maceió'
     fill_in 'Endereço', with: 'Avenida, 800'
-    fill_in 'CEP', with: '77000-000'
+    fill_in 'CEP', with: '77000000'
+    fill_in 'Código', with: 'mcz'
     fill_in 'Área', with: '65000'
     click_on 'Atualizar Galpão'
 
@@ -41,7 +41,7 @@ describe 'Usuário edita um galpão' do
     expect(page).to have_content 'Endereço: Avenida, 800'    
   end
 
-  it 'com dados incompletos' do
+  it 'e remove os dados dos campos' do
     visit root_path
     click_on 'Aeroporto SP'
     click_on 'Editar'
@@ -62,5 +62,21 @@ describe 'Usuário edita um galpão' do
     expect(page).to have_content 'Área não pode ficar em branco'
     expect(page).to have_content 'CEP não é válido'
     expect(page).to have_content 'Código não é válido'
+  end
+
+  it 'sem modificar os campos' do 
+    visit root_path
+    click_on 'Aeroporto SP'
+    click_on 'Editar'
+    fill_in 'Nome', with: 'Aeroporto SP'
+    fill_in 'Código', with: 'GRU'
+    fill_in 'Descrição', with: 'Galpão destinado para cargas internacionais'
+    fill_in 'Cidade', with: 'Guarulhos'
+    fill_in 'Endereço', with: 'Avenida do Aeroporto, 1000'
+    fill_in 'CEP', with: '15000-000'
+    fill_in 'Área', with: '100000'
+    click_on 'Atualizar Galpão'
+
+    expect(page).to have_content 'Nenhuma modificação encontrada'
   end
 end

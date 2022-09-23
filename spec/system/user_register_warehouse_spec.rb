@@ -5,13 +5,13 @@ describe 'Usuário cadastra um galpão' do
     visit root_path
     click_on 'Cadastrar Galpão'
 
-    expect(page).to have_field('Nome')
-    expect(page).to have_field('Descrição')
-    expect(page).to have_field('Código')
-    expect(page).to have_field('Cidade')
-    expect(page).to have_field('Endereço')
-    expect(page).to have_field('CEP')
-    expect(page).to have_field('Área')
+    expect(page).to have_field 'Nome'
+    expect(page).to have_field 'Descrição'
+    expect(page).to have_field 'Código'
+    expect(page).to have_field 'Cidade'
+    expect(page).to have_field 'Endereço'
+    expect(page).to have_field 'CEP'
+    expect(page).to have_field 'Área'
   end
 
   it 'com sucesso' do
