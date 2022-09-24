@@ -26,7 +26,7 @@ describe 'Usuário cadastra um fornecedor' do
     fill_in 'CNPJ', with: '44037925000122'
     fill_in 'Endereço', with: 'Torre da Indústria, 10'
     fill_in 'Cidade', with: 'Teresina'
-    fill_in 'Estado', with: 'PI'
+    fill_in 'Estado', with: 'Pi'
     fill_in 'E-mail', with: 'vendas@spark.com.br'
     click_on 'Criar Fornecedor'
 
@@ -34,6 +34,7 @@ describe 'Usuário cadastra um fornecedor' do
     expect(page).to have_content 'Spark Industries Brasil LTDA'
     expect(page).to have_content 'Documento: 44.037.925/0001-22'
     expect(page).to have_content 'E-mail: vendas@spark.com.br'
+    expect(page).to have_content 'Endereço: Torre da Indústria, 10 - Teresina - PI'
   end
 
   it 'com dados incompletos' do 

@@ -1,5 +1,5 @@
 class SuppliersController < ApplicationController
-  before_action :set_supplier, only:[:show]
+  before_action :set_supplier, only:[:show, :edit, :update]
 
   def index
     @suppliers = Supplier.all
@@ -7,6 +7,7 @@ class SuppliersController < ApplicationController
 
   def show
     formatted_document @supplier
+    @supplier[:state].upcase!
   end
 
   def new
@@ -21,6 +22,22 @@ class SuppliersController < ApplicationController
       flash.now[:alert] = 'Fornecedor não cadastrado'
       render :new
     end  
+  end
+
+  def edit; end
+
+  def update
+    if @supplier[:corporate_name] == supplier_params[:corporate_name] && @supplier[:brand_name] == supplier_params[:brand_name] && @supplier[:registration_number] == supplier_params[:registration_number] && @supplier[:full_address] == supplier_params[:full_address] && @supplier[:city] == supplier_params[:city] && @supplier[:state] == supplier_params[:state] && @supplier[:email] == supplier_params[:email]
+      flash.now[:alert] = 'Nenhuma modificação encontrada'
+      render :edit
+    else
+      if @supplier.update(supplier_params) 
+        redirect_to @supplier, notice: 'Fornecedor atualizado com sucesso'
+      else
+        flash.now[:alert] = 'Não foi possível atualizar o fornecedor'
+        render :edit
+      end
+    end
   end
 
   private
