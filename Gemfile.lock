@@ -85,6 +85,8 @@ GEM
       reline (>= 0.3.1)
     diff-lcs (1.5.0)
     digest (3.1.0)
+    email_validator (2.2.3)
+      activemodel
     erubi (1.11.0)
     globalid (1.0.0)
       activesupport (>= 5.0)
@@ -200,6 +202,7 @@ PLATFORMS
 DEPENDENCIES
   capybara
   debug
+  email_validator (~> 2.2, >= 2.2.3)
   puma (~> 5.0)
   rails (~> 7.0.3, >= 7.0.3.1)
   rspec-rails

@@ -24,13 +24,13 @@ class WarehousesController < ApplicationController
 
   def update 
     if @warehouse[:name] == warehouse_params[:name] && @warehouse[:description] == warehouse_params[:description] && @warehouse[:code] == warehouse_params[:code] && @warehouse[:city] == warehouse_params[:city] && @warehouse[:address] == warehouse_params[:address] && @warehouse[:cep] == warehouse_params[:cep] && "#{@warehouse[:area]}" == "#{warehouse_params[:area]}"
-      flash.now[:notice] = 'Nenhuma modificação encontrada'
+      flash.now[:alert] = 'Nenhuma modificação encontrada'
       render :edit
     else
       if @warehouse.update(warehouse_params) 
-        redirect_to warehouse_url(@warehouse), notice: 'Galpão atualizado com sucesso'
+        redirect_to @warehouse, notice: 'Galpão atualizado com sucesso'
       else
-        flash.now[:notice] = 'Não foi possível atualizar o galpão'
+        flash.now[:alert] = 'Não foi possível atualizar o galpão'
         render :edit
       end
     end
