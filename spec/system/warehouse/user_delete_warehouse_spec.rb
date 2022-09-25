@@ -14,7 +14,7 @@ describe 'Usuário remove um galpão' do
 
   it 'e não apaga outros galpões' do
     Warehouse.create!(name: 'Maceió', code: 'MCZ', city: 'Maceió', area: 50_000,
-    address: 'Avenida Atlântica, 50', cep: '80000-000',
+    address: 'Avenida Atlântica, 50', zip_code: '80000-000',
     description: 'Perto do Aeroporto')
 
     visit root_path

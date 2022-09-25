@@ -18,7 +18,7 @@ describe 'Usuário edita um galpão' do
 
   it 'com sucesso' do 
     warehouse = Warehouse.create!(name: 'Maceió', code: 'MCZ', city: 'Maceió', area: 50_000,
-    address: 'Avenida Atlântica, 50', cep: '80000-000',
+    address: 'Avenida Atlântica, 50', zip_code: '80000-000',
     description: 'Perto do Aeroporto')
 
     visit root_path
@@ -60,8 +60,6 @@ describe 'Usuário edita um galpão' do
     expect(page).to have_content 'Endereço não pode ficar em branco'
     expect(page).to have_content 'CEP não pode ficar em branco'
     expect(page).to have_content 'Área não pode ficar em branco'
-    expect(page).to have_content 'CEP não é válido'
-    expect(page).to have_content 'Código não é válido'
   end
 
   it 'sem modificar os campos' do 
@@ -78,5 +76,17 @@ describe 'Usuário edita um galpão' do
     click_on 'Atualizar Galpão'
 
     expect(page).to have_content 'Nenhuma modificação encontrada'
+  end
+
+  it 'com dados inválidos' do 
+    visit root_path
+    click_on 'Aeroporto SP'
+    click_on 'Editar'
+    fill_in 'Código', with: 'G'
+    fill_in 'CEP', with: '15'
+    click_on 'Atualizar Galpão'
+
+    expect(page).to have_content 'CEP não é válido'
+    expect(page).to have_content 'Código não é válido'
   end
 end

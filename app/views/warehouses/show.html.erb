@@ -4,7 +4,7 @@
   <p><strong>Nome: </strong><%= @warehouse.name %></p>
   <p><strong>Cidade: </strong><%= @warehouse.city %></p>
   <p><strong>Área: </strong><%= "#{@warehouse.area} m²" %></p>
-  <p><strong>Endereço: </strong><%= @warehouse.address %> <strong>CEP: </strong><%= @warehouse.cep %></p>
+  <p><strong>Endereço: </strong><%= @warehouse.address %> <strong>CEP: </strong><%= @warehouse.zip_code %></p>
 </div>
 <div>
   <%= link_to 'Editar', edit_warehouse_path(@warehouse) %>

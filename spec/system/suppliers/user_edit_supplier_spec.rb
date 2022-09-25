@@ -61,8 +61,6 @@ describe 'Usuário edita um fornecedor' do
     expect(page).to have_content 'Razão Social não pode ficar em branco'
     expect(page).to have_content 'CNPJ não pode ficar em branco'
     expect(page).to have_content 'E-mail não pode ficar em branco'
-    expect(page).to have_content 'CNPJ não é válido'
-    expect(page).to have_content 'E-mail não é válido'
   end
 
   it 'sem modificar os campos' do 
@@ -80,5 +78,18 @@ describe 'Usuário edita um fornecedor' do
     click_on 'Atualizar Fornecedor'
 
     expect(page).to have_content 'Nenhuma modificação encontrada'
+  end
+
+  it 'com dados inválidos' do 
+    visit root_path
+    click_on 'Fornecedores'
+    click_on 'ACME'
+    click_on 'Editar'
+    fill_in 'CNPJ', with: '34'
+    fill_in 'E-mail', with: 'contato@'
+    click_on 'Atualizar Fornecedor'
+
+    expect(page).to have_content 'CNPJ não é válido'
+    expect(page).to have_content 'E-mail não é válido'
   end
 end

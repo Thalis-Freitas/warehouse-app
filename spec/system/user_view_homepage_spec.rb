@@ -7,6 +7,10 @@ describe 'Usuário visita tela inicial' do
   end
 
   it 'e vê os galpões cadastrados' do 
+    Warehouse.create!(name: 'Maceió', code: 'MCZ', city: 'Maceió', area: 50_000,
+    address: 'Avenida Atlântica, 50', zip_code: '80000-000',
+    description: 'Perto do Aeroporto')
+
     visit root_path
 
     expect(page).not_to have_content 'Não existem galpões cadastrados'
@@ -14,6 +18,10 @@ describe 'Usuário visita tela inicial' do
     expect(page).to have_content 'Código: GRU'
     expect(page).to have_content 'Cidade: Guarulhos'
     expect(page).to have_content '100000 m²'
+    expect(page).to have_content 'Maceió'
+    expect(page).to have_content 'Código: MCZ'
+    expect(page).to have_content 'Cidade: Maceió'
+    expect(page).to have_content '50000 m²'
   end
 
   it 'e não existem galpões cadastrados' do 

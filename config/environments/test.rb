@@ -27,8 +27,8 @@ Rails.application.configure do
   config.action_controller.perform_caching = false
   config.cache_store = :null_store
 
-  # Raise exceptions instead of rendering exception templates.
-  config.action_dispatch.show_exceptions = false
+  # Raise exzip_codetions instead of rendering exzip_codetion templates.
+  config.action_dispatch.show_exzip_codetions = false
 
   # Disable request forgery protection in test environment.
   config.action_controller.allow_forgery_protection = false
@@ -36,7 +36,7 @@ Rails.application.configure do
   # Print deprecation notices to the stderr.
   config.active_support.deprecation = :stderr
 
-  # Raise exceptions for disallowed deprecations.
+  # Raise exzip_codetions for disallowed deprecations.
   config.active_support.disallowed_deprecation = :raise
 
   # Tell Active Support which deprecation messages to disallow.

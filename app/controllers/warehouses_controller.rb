@@ -2,7 +2,7 @@ class WarehousesController < ApplicationController
   before_action :set_warehouse, only:[:show, :edit, :update, :destroy]
 
   def show
-    formatted_cep @warehouse
+    formatted_zip_code @warehouse
     @warehouse[:code].upcase!
   end
 
@@ -23,7 +23,7 @@ class WarehousesController < ApplicationController
   def edit; end
 
   def update 
-    if @warehouse[:name] == warehouse_params[:name] && @warehouse[:description] == warehouse_params[:description] && @warehouse[:code] == warehouse_params[:code] && @warehouse[:city] == warehouse_params[:city] && @warehouse[:address] == warehouse_params[:address] && @warehouse[:cep] == warehouse_params[:cep] && "#{@warehouse[:area]}" == "#{warehouse_params[:area]}"
+    if @warehouse[:name] == warehouse_params[:name] && @warehouse[:description] == warehouse_params[:description] && @warehouse[:code] == warehouse_params[:code] && @warehouse[:city] == warehouse_params[:city] && @warehouse[:address] == warehouse_params[:address] && @warehouse[:zip_code] == warehouse_params[:zip_code] && "#{@warehouse[:area]}" == "#{warehouse_params[:area]}"
       flash.now[:alert] = 'Nenhuma modificação encontrada'
       render :edit
     else
@@ -49,10 +49,10 @@ class WarehousesController < ApplicationController
 
   def warehouse_params
     params.require(:warehouse).permit(:name, :code, :city, :description, :address,
-                                      :cep, :area)
+                                      :zip_code, :area)
   end
 
-  def formatted_cep(warehouse)
-    warehouse[:cep].insert(5, '-') if warehouse[:cep].length == 8 
+  def formatted_zip_code(warehouse)
+    warehouse[:zip_code].insert(5, '-') if warehouse[:zip_code].length == 8 
   end 
 end
