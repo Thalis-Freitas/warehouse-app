@@ -8,8 +8,11 @@ class SuppliersController < ApplicationController
   def show
     formatted_document @supplier
     @supplier[:state].upcase!
+    @product_models = ProductModel.all.select do |m|
+      m if m.supplier_id.eql? @supplier.id
+    end
   end
-
+  
   def new
     @supplier = Supplier.new
   end

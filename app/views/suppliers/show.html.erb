@@ -14,6 +14,20 @@
   <%= link_to 'Editar', edit_supplier_path(@supplier) %>
 </div>
 
+<% if @product_models.any? %>
+  <h3>Modelos de produtos cadastrados:</h3>
+  <ul>
+    <% @product_models.each do |m| %>
+      <p><b><%= m.name %></b></p>
+      <li>SKU: <%= m.sku %></li>
+      <li>Dimensões: <%= "#{m.height}cm x #{m.width}cm x #{m.depth}cm" %></li>
+      <li>Peso: <%= m.weight %>g</li>
+    <% end %>
+  </ul>
+<% else %> 
+  <h3>Nenhum modelo de produto cadastrado para este fornecedor</h3>
+<% end %>
+
 <div>
   <%= link_to 'Voltar', root_path %>
 </div>

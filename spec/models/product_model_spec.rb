@@ -49,9 +49,16 @@ RSpec.describe ProductModel, type: :model do
       product_model = ProductModel.new(name: 'TV 40', weight: 6300, width: 101, height: 49, depth: 8,
                                        sku: '', supplier: supplier)
       expect(product_model.valid?).to eq false
+    end    
+    it 'false when there is no supplier' do 
+      supplier = Supplier.create!(brand_name: 'LG', corporate_name: 'LG LTDA',
+                                  registration_number: '64738922000198', full_address: 'Av das Nações 89', 
+                                  city: 'Salvador', state: 'BA', email: 'contato@lg.com.br')
+      product_model = ProductModel.new(name: 'TV 40', weight: 6300, width: 101, height: 49, depth: 8,
+                                       sku: 'TV4000-LGELT-XPBA760')
+      expect(product_model.valid?).to eq false
     end
   end
-
   context 'uniqueness' do 
     it 'false when sku is already in use' do 
       supplier = Supplier.create!(brand_name: 'LG', corporate_name: 'LG LTDA',
