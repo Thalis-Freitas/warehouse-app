@@ -1,12 +1,19 @@
 require 'rails_helper'
 
 describe 'Usuário visita tela inicial' do
+  it 'se estiver autenticado' do
+    visit root_path
+    expect(current_path).to eq new_user_session_path
+  end
+  
   it 'e vê o nome da app' do
+    login_as(User.last)
     visit root_path
     expect(page).to have_content 'Galpões & Estoque'
   end
 
   it 'e vê os galpões cadastrados' do 
+    login_as(User.last)
     Warehouse.create!(name: 'Maceió', code: 'MCZ', city: 'Maceió', area: 50_000,
     address: 'Avenida Atlântica, 50', zip_code: '80000-000',
     description: 'Perto do Aeroporto')
@@ -25,6 +32,7 @@ describe 'Usuário visita tela inicial' do
   end
 
   it 'e não existem galpões cadastrados' do 
+    login_as(User.last)
     Warehouse.delete_all
     visit root_path
     expect(page).to have_content 'Não existem galpões cadastrados'

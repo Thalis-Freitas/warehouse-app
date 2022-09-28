@@ -2,6 +2,7 @@ require 'rails_helper'
 
 describe 'Usuário remove um galpão' do
   it 'com sucesso' do
+    login_as(User.last)
     visit root_path
     click_on 'Aeroporto SP'
     click_on 'Remover'
@@ -13,6 +14,7 @@ describe 'Usuário remove um galpão' do
   end
 
   it 'e não apaga outros galpões' do
+    login_as(User.last)
     Warehouse.create!(name: 'Maceió', code: 'MCZ', city: 'Maceió', area: 50_000,
     address: 'Avenida Atlântica, 50', zip_code: '80000-000',
     description: 'Perto do Aeroporto')

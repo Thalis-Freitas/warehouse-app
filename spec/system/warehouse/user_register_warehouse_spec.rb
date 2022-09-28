@@ -2,6 +2,7 @@ require 'rails_helper'
 
 describe 'Usuário cadastra um galpão' do
   it 'a partir da tela inicial' do 
+    login_as(User.last)
     visit root_path
     click_on 'Cadastrar Galpão'
 
@@ -15,6 +16,7 @@ describe 'Usuário cadastra um galpão' do
   end
 
   it 'com sucesso' do
+    login_as(User.last)
     visit new_warehouse_path
     fill_in 'Nome' , with: 'Rio de Janeiro'
     fill_in 'Descrição', with: 'Galpão da zona portuária do Rio'
@@ -33,6 +35,7 @@ describe 'Usuário cadastra um galpão' do
   end
 
   it 'com dados incompletos' do 
+    login_as(User.last)
     visit new_warehouse_path
     fill_in 'Nome', with: ''
     fill_in 'Descrição', with: ''
@@ -50,6 +53,7 @@ describe 'Usuário cadastra um galpão' do
   end
 
   it 'com dado exclusivo que já está em uso' do 
+    login_as(User.last)
     visit new_warehouse_path
     fill_in 'Nome', with: 'Aeroporto SP'
     fill_in 'Código', with: 'GRU'
@@ -60,6 +64,7 @@ describe 'Usuário cadastra um galpão' do
   end
 
   it 'com dados inválidos' do 
+    login_as(User.last)
     visit new_warehouse_path
     fill_in 'Código', with: 'Rj'
     fill_in 'CEP', with: '25000'

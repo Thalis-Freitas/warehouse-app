@@ -1,7 +1,13 @@
 require 'rails_helper'
 
 describe 'Usuário cadastra um fornecedor' do
+  it 'se estiver autenticado' do
+    visit new_supplier_path
+    expect(current_path).to eq new_user_session_path
+  end
+
   it 'a partir do menu' do 
+    login_as(User.last)
     visit root_path
     click_on 'Fornecedores'
     click_on 'Cadastrar novo fornecedor'
@@ -16,6 +22,7 @@ describe 'Usuário cadastra um fornecedor' do
   end
 
   it 'com sucesso' do
+    login_as(User.last)
     visit new_supplier_path
     fill_in 'Nome Fantasia' , with: 'Spark'
     fill_in 'Razão Social', with: 'Spark Industries Brasil LTDA'
@@ -34,6 +41,7 @@ describe 'Usuário cadastra um fornecedor' do
   end
 
   it 'com dados incompletos' do 
+    login_as(User.last)
     visit new_supplier_path
     fill_in 'Nome Fantasia', with: ''
     fill_in 'Razão Social', with: ''
@@ -49,6 +57,7 @@ describe 'Usuário cadastra um fornecedor' do
   end
 
   it 'com dado exclusivo que já está em uso' do 
+    login_as(User.last)
     visit new_supplier_path
     fill_in 'CNPJ', with: '34472163000102'
     click_on 'Criar Fornecedor'
@@ -57,6 +66,7 @@ describe 'Usuário cadastra um fornecedor' do
   end
 
   it 'com dados inválidos' do 
+    login_as(User.last)
     visit new_supplier_path
     fill_in 'CNPJ', with: '344721'
     fill_in 'E-mail', with: 'vendasspark.com.br'

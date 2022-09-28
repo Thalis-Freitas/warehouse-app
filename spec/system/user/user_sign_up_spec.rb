@@ -3,7 +3,7 @@ require 'rails_helper'
 describe 'Usuário cria uma conta' do
   it 'com sucesso' do
     visit root_path
-    click_on 'Entrar'
+    expect(current_path).to eq new_user_session_path
     click_on 'Criar uma conta'
     fill_in 'Nome', with: 'Cláudia'
     fill_in 'E-mail', with: 'claudia@email.com'

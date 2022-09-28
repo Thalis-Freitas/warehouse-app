@@ -2,6 +2,7 @@ require 'rails_helper'
 
 describe 'Usuário vê detalhes de um galpão' do
   it 'e vê informações adicionais' do 
+    login_as(User.last)
     visit root_path
     click_on 'Aeroporto SP'
 
@@ -14,6 +15,7 @@ describe 'Usuário vê detalhes de um galpão' do
   end
 
   it 'e volta para a tela inicial' do 
+    login_as(User.last)
     visit root_path
     click_on 'Aeroporto SP'
     click_on 'Voltar'

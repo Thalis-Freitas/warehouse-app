@@ -1,7 +1,13 @@
 require 'rails_helper'
 
 describe 'Usuário vê detalhes dos modelos de produto' do
+  it 'se estiver autenticado' do
+    visit suppliers_path
+    expect(current_path).to eq new_user_session_path
+  end
+
   it 'a partir do fornecedor' do 
+    login_as(User.last)
     visit root_path
     click_on 'Fornecedores'
     click_on 'Samsung'
@@ -19,6 +25,7 @@ describe 'Usuário vê detalhes dos modelos de produto' do
   end
 
   it 'e não existem modelos de produtos cadastrados para o fornecedor' do 
+    login_as(User.last)
     ProductModel.destroy_all
 
     visit suppliers_path

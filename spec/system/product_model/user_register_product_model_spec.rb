@@ -1,7 +1,13 @@
 require 'rails_helper'
 
 describe 'Usuário cadastra modelo de produto' do
+  it 'se estiver autenticado' do
+    visit new_product_model_path
+    expect(current_path).to eq new_user_session_path
+  end
+
   it 'a partir do menu' do 
+    login_as(User.last)
     visit root_path
     click_on 'Modelos de Produtos'
     click_on 'Cadastrar novo modelo'
@@ -16,8 +22,8 @@ describe 'Usuário cadastra modelo de produto' do
   end
 
   it 'com sucesso' do
-		visit product_models_path
-    click_on 'Cadastrar novo modelo'
+    login_as(User.last)
+    visit new_product_model_path
     fill_in 'Nome', with: 'Smartphone 07'
     fill_in 'Peso', with: 300
     fill_in 'Altura', with: 12
@@ -36,8 +42,8 @@ describe 'Usuário cadastra modelo de produto' do
   end
 
   it 'com dados incompletos' do 
-    visit product_models_path
-    click_on 'Cadastrar novo modelo'
+    login_as(User.last)
+    visit new_product_model_path
     fill_in 'Nome', with: ''
     fill_in 'SKU', with: ''
     fill_in 'Altura', with: ''
@@ -52,8 +58,8 @@ describe 'Usuário cadastra modelo de produto' do
   end
 
   it 'com dado exclusivo que já está em uso' do 
-    visit product_models_path
-    click_on 'Cadastrar novo modelo'
+    login_as(User.last)
+    visit new_product_model_path
     fill_in 'Nome', with: 'TV 40'
     fill_in 'SKU', with: 'TV4000-SAMSU-XPBA760'
     click_on 'Criar Modelo de Produto'
@@ -63,8 +69,8 @@ describe 'Usuário cadastra modelo de produto' do
   end
 
   it 'com dados inválidos' do 
-		visit product_models_path
-    click_on 'Cadastrar novo modelo'
+    login_as(User.last)
+    visit new_product_model_path
     fill_in 'SKU', with: 'TV4'
     fill_in 'Peso', with: 0
     fill_in 'Largura', with: 0

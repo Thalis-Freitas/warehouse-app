@@ -1,7 +1,13 @@
 require 'rails_helper'
 
 describe 'Usuário vê modelos de produtos' do 
+  it 'se estiver autenticado' do
+    visit product_models_path
+    expect(current_path).to eq new_user_session_path
+  end
+
   it 'a partir do menu' do
+    login_as(User.last)
     visit root_path
     within('nav') do 
       click_on 'Modelos de Produtos'
@@ -11,6 +17,7 @@ describe 'Usuário vê modelos de produtos' do
   end
 
   it 'com sucesso' do 
+    login_as(User.last)
     visit product_models_path
 
     expect(page).not_to have_content 'Nenhum modelo de produto cadastrado'
@@ -23,6 +30,7 @@ describe 'Usuário vê modelos de produtos' do
   end
 
   it 'e não existem produtos cadastrados' do 
+    login_as(User.last)
     ProductModel.destroy_all
     visit product_models_path
 

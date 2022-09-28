@@ -2,6 +2,7 @@ require 'rails_helper'
 
 describe 'Usuário edita um galpão' do  
   it 'a partir da página de detalhes' do
+    login_as(User.last)
     visit root_path
     click_on 'Aeroporto SP'
     click_on 'Editar'
@@ -17,6 +18,7 @@ describe 'Usuário edita um galpão' do
   end
 
   it 'com sucesso' do 
+    login_as(User.last)
     warehouse = Warehouse.create!(name: 'Maceió', code: 'MCZ', city: 'Maceió', area: 50_000,
     address: 'Avenida Atlântica, 50', zip_code: '80000-000',
     description: 'Perto do Aeroporto')
@@ -42,6 +44,7 @@ describe 'Usuário edita um galpão' do
   end
 
   it 'e remove os dados dos campos' do
+    login_as(User.last)
     visit root_path
     click_on 'Aeroporto SP'
     click_on 'Editar'
@@ -63,6 +66,7 @@ describe 'Usuário edita um galpão' do
   end
 
   it 'sem modificar os campos' do 
+    login_as(User.last)
     visit root_path
     click_on 'Aeroporto SP'
     click_on 'Editar'
@@ -79,6 +83,7 @@ describe 'Usuário edita um galpão' do
   end
 
   it 'com dados inválidos' do 
+    login_as(User.last)
     visit root_path
     click_on 'Aeroporto SP'
     click_on 'Editar'
