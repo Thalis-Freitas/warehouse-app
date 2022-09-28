@@ -22,8 +22,7 @@ describe 'Usuário edita um fornecedor' do
                                 registration_number: '44037925000122', full_address: 'Torre da Indústria, 10',
                                 city: 'Teresina', state: 'PI', email: 'vendas@spark.com.br')
 
-    visit root_path
-    click_on 'Fornecedores'
+    visit suppliers_path
     click_on 'Spark'
     click_on 'Editar'
 
@@ -42,8 +41,7 @@ describe 'Usuário edita um fornecedor' do
   end
 
   it 'e remove os dados dos campos' do
-    visit root_path
-    click_on 'Fornecedores'
+    visit suppliers_path
     click_on 'ACME'
     click_on 'Editar'
 
@@ -64,8 +62,7 @@ describe 'Usuário edita um fornecedor' do
   end
 
   it 'sem modificar os campos' do 
-    visit root_path
-    click_on 'Fornecedores'
+    visit suppliers_path
     click_on 'ACME'
     click_on 'Editar'
     fill_in 'Nome Fantasia', with: 'ACME'
@@ -81,8 +78,7 @@ describe 'Usuário edita um fornecedor' do
   end
 
   it 'com dados inválidos' do 
-    visit root_path
-    click_on 'Fornecedores'
+    visit suppliers_path
     click_on 'ACME'
     click_on 'Editar'
     fill_in 'CNPJ', with: '34'

@@ -64,20 +64,16 @@ RSpec.describe ProductModel, type: :model do
       supplier = Supplier.create!(brand_name: 'LG', corporate_name: 'LG LTDA',
                                   registration_number: '64738922000198', full_address: 'Av das Nações 89', 
                                   city: 'Salvador', state: 'BA', email: 'contato@lg.com.br')
-      ProductModel.create!(name: 'Notebook 05', weight: 1800, width: 35, height: 38, depth: 2,
-                           sku: 'NOTE05-LGELT-FL703DT', supplier: supplier)
-      product_model = ProductModel.new(name: 'TV 40', weight: 6300, width: 101, height: 49, depth: 8,
-                                           sku: 'NOTE05-LGELT-FL703DT', supplier: supplier)
+      product_model = ProductModel.new(name: 'Smartphone 07', weight: 220, width: 5, height: 12, depth: 1,
+                                       sku: 'TV4000-SAMSU-XPBA760', supplier: supplier)
       expect(product_model.valid?).to eq false
     end
     it 'false when name is already in use' do 
       supplier = Supplier.create!(brand_name: 'LG', corporate_name: 'LG LTDA',
                                   registration_number: '64738922000198', full_address: 'Av das Nações 89', 
                                   city: 'Salvador', state: 'BA', email: 'contato@lg.com.br')
-      ProductModel.create!(name: 'Notebook 05', weight: 1800, width: 35, height: 38, depth: 2,
-                           sku: 'NOTE05-LGELT-FL703DT', supplier: supplier)
-      product_model = ProductModel.new(name: 'Notebook 05', weight: 6300, width: 101, height: 49, depth: 8,
-                                       sku: 'TV4000-LGELT-XPBA760', supplier: supplier)
+      product_model = ProductModel.new(name: 'TV 40', weight: 220, width: 5, height: 12, depth: 1,
+                                       sku: 'TV4000-SAMSU-XPBA760', supplier: supplier)
       expect(product_model.valid?).to eq false
     end
   end

@@ -2,7 +2,6 @@ require 'rails_helper'
 
 describe 'Usuário cadastra um fornecedor' do
   it 'a partir do menu' do 
-
     visit root_path
     click_on 'Fornecedores'
     click_on 'Cadastrar novo fornecedor'
@@ -17,10 +16,7 @@ describe 'Usuário cadastra um fornecedor' do
   end
 
   it 'com sucesso' do
-    visit root_path
-    click_on 'Fornecedores'
-    click_on 'Cadastrar novo fornecedor'
-
+    visit new_supplier_path
     fill_in 'Nome Fantasia' , with: 'Spark'
     fill_in 'Razão Social', with: 'Spark Industries Brasil LTDA'
     fill_in 'CNPJ', with: '44037925000122'
@@ -38,9 +34,7 @@ describe 'Usuário cadastra um fornecedor' do
   end
 
   it 'com dados incompletos' do 
-    visit root_path
-    click_on 'Fornecedores'
-    click_on 'Cadastrar novo fornecedor'
+    visit new_supplier_path
     fill_in 'Nome Fantasia', with: ''
     fill_in 'Razão Social', with: ''
     fill_in 'CNPJ', with: ''
@@ -55,9 +49,7 @@ describe 'Usuário cadastra um fornecedor' do
   end
 
   it 'com dado exclusivo que já está em uso' do 
-    visit root_path
-    click_on 'Fornecedores'
-    click_on 'Cadastrar novo fornecedor'
+    visit new_supplier_path
     fill_in 'CNPJ', with: '34472163000102'
     click_on 'Criar Fornecedor'
 
@@ -65,9 +57,7 @@ describe 'Usuário cadastra um fornecedor' do
   end
 
   it 'com dados inválidos' do 
-    visit root_path
-    click_on 'Fornecedores'
-    click_on 'Cadastrar novo fornecedor'
+    visit new_supplier_path
     fill_in 'CNPJ', with: '344721'
     fill_in 'E-mail', with: 'vendasspark.com.br'
     click_on 'Criar Fornecedor'

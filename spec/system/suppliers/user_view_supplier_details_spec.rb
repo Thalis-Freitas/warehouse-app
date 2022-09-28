@@ -13,8 +13,7 @@ describe 'Usuário vê detalhes de um forcenedor' do
   end
 
   it 'e volta para a tela inicial' do 
-    visit root_path
-    click_on 'Fornecedores'
+    visit suppliers_path
     click_on 'ACME'
     click_on 'Voltar'
 

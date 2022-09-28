@@ -15,8 +15,7 @@ describe 'Usuário cadastra um galpão' do
   end
 
   it 'com sucesso' do
-    visit root_path
-    click_on 'Cadastrar Galpão'
+    visit new_warehouse_path
     fill_in 'Nome' , with: 'Rio de Janeiro'
     fill_in 'Descrição', with: 'Galpão da zona portuária do Rio'
     fill_in 'Código', with: 'RIO'
@@ -34,8 +33,7 @@ describe 'Usuário cadastra um galpão' do
   end
 
   it 'com dados incompletos' do 
-    visit root_path
-    click_on 'Cadastrar Galpão'
+    visit new_warehouse_path
     fill_in 'Nome', with: ''
     fill_in 'Descrição', with: ''
     fill_in 'Código', with: ''
@@ -52,8 +50,7 @@ describe 'Usuário cadastra um galpão' do
   end
 
   it 'com dado exclusivo que já está em uso' do 
-    visit root_path
-    click_on 'Cadastrar Galpão'
+    visit new_warehouse_path
     fill_in 'Nome', with: 'Aeroporto SP'
     fill_in 'Código', with: 'GRU'
     click_on 'Criar Galpão'
@@ -63,8 +60,7 @@ describe 'Usuário cadastra um galpão' do
   end
 
   it 'com dados inválidos' do 
-    visit root_path
-    click_on 'Cadastrar Galpão'
+    visit new_warehouse_path
     fill_in 'Código', with: 'Rj'
     fill_in 'CEP', with: '25000'
     click_on 'Criar Galpão'
