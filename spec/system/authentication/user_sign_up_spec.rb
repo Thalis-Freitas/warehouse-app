@@ -19,6 +19,8 @@ describe 'Usuário cria uma conta' do
   end
 
   it 'com email que já está em uso' do
+    User.create!(name: 'José', email: 'jose@email.com', password: 'password')
+
     visit new_user_session_path
     click_on 'Criar uma conta'
     fill_in 'Nome', with: 'Cláudia'

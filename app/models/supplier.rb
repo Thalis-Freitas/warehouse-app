@@ -4,4 +4,8 @@ class Supplier < ApplicationRecord
   validates :registration_number, uniqueness: true
   validates :registration_number, format: {with: /\A[0-9]{14}\z/}, allow_blank: true
   validates :email, email: true, allow_blank: true
+
+  def full_description
+    "#{corporate_name} | #{state}"
+  end
 end

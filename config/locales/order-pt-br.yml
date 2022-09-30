@@ -1,0 +1,18 @@
+pt-BR:
+  activerecord:
+    models:
+      order: Pedido
+    attributes:
+      order: 
+        warehouse_id: 'Galpão Destino'
+        warehouse: 'Galpão Destino'
+        supplier_id: 'Fornecedor'
+        supplier: 'Fornecedor'
+        width: 'Largura'
+        height: 'Altura'
+        depth: 'Profundidade'
+        sku: 'SKU'
+        user_id: 'Usuário Responsável'
+        user: 'Usuário Responsável'
+        estimated_delivery_date: 'Previsão de Entrega'
+        code: 'Código'

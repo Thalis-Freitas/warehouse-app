@@ -1,15 +1,12 @@
-<h2>Galpão <%= @warehouse.code %></h2>
+<h2><%= "#{Warehouse.model_name.human} #{@warehouse.code}" %></h2>
 <h3><%= @warehouse.description %></h3>
 <div>
-  <p><strong>Nome: </strong><%= @warehouse.name %></p>
-  <p><strong>Cidade: </strong><%= @warehouse.city %></p>
-  <p><strong>Área: </strong><%= "#{@warehouse.area} m²" %></p>
-  <p><strong>Endereço: </strong><%= @warehouse.address %> <strong>CEP: </strong><%= @warehouse.zip_code %></p>
+  <p><strong><%= Warehouse.human_attribute_name(:name) %>: </strong><%= @warehouse.name %></p>
+  <p><strong><%= Warehouse.human_attribute_name(:city) %>: </strong><%= @warehouse.city %></p>
+  <p><strong><%= Warehouse.human_attribute_name(:area) %>: </strong><%= "#{@warehouse.area} m²" %></p>
+  <p><strong><%= Warehouse.human_attribute_name(:address) %>: </strong><%= @warehouse.address %> <strong>CEP: </strong><%= @warehouse.zip_code %></p>
 </div>
 <div>
   <%= link_to 'Editar', edit_warehouse_path(@warehouse) %>
   <%= button_to 'Remover', warehouse_path(@warehouse), method: :delete %>
-</div>
-<div>
-  <%= link_to 'Voltar', root_path %>
 </div>

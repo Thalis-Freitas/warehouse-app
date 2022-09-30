@@ -2,7 +2,12 @@ require 'rails_helper'
 
 describe 'Usuário edita um galpão' do  
   it 'a partir da página de detalhes' do
-    login_as(User.last)
+    Warehouse.create!(name: 'Aeroporto SP', code: 'GRU', city: 'Guarulhos', area: '100000',
+                      address: 'Avenida do Aeroporto, 1000', zip_code: '15000-000',
+                      description: 'Galpão destinado para cargas internacionais')
+    user = User.create!(name: 'Lucia', email: 'lucia@email.com', password: 'pass1234')
+
+    login_as(user)
     visit root_path
     click_on 'Aeroporto SP'
     click_on 'Editar'
@@ -18,11 +23,12 @@ describe 'Usuário edita um galpão' do
   end
 
   it 'com sucesso' do 
-    login_as(User.last)
     warehouse = Warehouse.create!(name: 'Maceió', code: 'MCZ', city: 'Maceió', area: 50_000,
-    address: 'Avenida Atlântica, 50', zip_code: '80000-000',
-    description: 'Perto do Aeroporto')
+                                  address: 'Avenida Atlântica, 50', zip_code: '80000-000',
+                                  description: 'Perto do Aeroporto')
+    user = User.create!(name: 'Lucia', email: 'lucia@email.com', password: 'pass1234')
 
+    login_as(user)
     visit root_path
     click_on 'Maceió'
     click_on 'Editar'
@@ -44,7 +50,12 @@ describe 'Usuário edita um galpão' do
   end
 
   it 'e remove os dados dos campos' do
-    login_as(User.last)
+    Warehouse.create!(name: 'Aeroporto SP', code: 'GRU', city: 'Guarulhos', area: '100000',
+                      address: 'Avenida do Aeroporto, 1000', zip_code: '15000-000',
+                      description: 'Galpão destinado para cargas internacionais')
+    user = User.create!(name: 'Lucia', email: 'lucia@email.com', password: 'pass1234')
+
+    login_as(user)
     visit root_path
     click_on 'Aeroporto SP'
     click_on 'Editar'
@@ -66,7 +77,12 @@ describe 'Usuário edita um galpão' do
   end
 
   it 'sem modificar os campos' do 
-    login_as(User.last)
+    Warehouse.create!(name: 'Aeroporto SP', code: 'GRU', city: 'Guarulhos', area: '100000',
+                      address: 'Avenida do Aeroporto, 1000', zip_code: '15000-000',
+                      description: 'Galpão destinado para cargas internacionais')
+    user = User.create!(name: 'Lucia', email: 'lucia@email.com', password: 'pass1234')
+
+    login_as(user)
     visit root_path
     click_on 'Aeroporto SP'
     click_on 'Editar'
@@ -83,7 +99,12 @@ describe 'Usuário edita um galpão' do
   end
 
   it 'com dados inválidos' do 
-    login_as(User.last)
+    Warehouse.create!(name: 'Aeroporto SP', code: 'GRU', city: 'Guarulhos', area: '100000',
+                      address: 'Avenida do Aeroporto, 1000', zip_code: '15000-000',
+                      description: 'Galpão destinado para cargas internacionais')
+    user = User.create!(name: 'Lucia', email: 'lucia@email.com', password: 'pass1234')
+
+    login_as(user)
     visit root_path
     click_on 'Aeroporto SP'
     click_on 'Editar'

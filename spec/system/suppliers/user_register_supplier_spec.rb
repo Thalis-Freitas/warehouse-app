@@ -7,7 +7,8 @@ describe 'Usuário cadastra um fornecedor' do
   end
 
   it 'a partir do menu' do 
-    login_as(User.last)
+    user = User.create!(name: 'Lucia', email: 'lucia@email.com', password: 'pass1234')
+    login_as(user)
     visit root_path
     click_on 'Fornecedores'
     click_on 'Cadastrar novo fornecedor'
@@ -22,7 +23,8 @@ describe 'Usuário cadastra um fornecedor' do
   end
 
   it 'com sucesso' do
-    login_as(User.last)
+    user = User.create!(name: 'Lucia', email: 'lucia@email.com', password: 'pass1234')
+    login_as(user)
     visit new_supplier_path
     fill_in 'Nome Fantasia' , with: 'Spark'
     fill_in 'Razão Social', with: 'Spark Industries Brasil LTDA'
@@ -41,7 +43,8 @@ describe 'Usuário cadastra um fornecedor' do
   end
 
   it 'com dados incompletos' do 
-    login_as(User.last)
+    user = User.create!(name: 'Lucia', email: 'lucia@email.com', password: 'pass1234')
+    login_as(user)
     visit new_supplier_path
     fill_in 'Nome Fantasia', with: ''
     fill_in 'Razão Social', with: ''
@@ -56,8 +59,11 @@ describe 'Usuário cadastra um fornecedor' do
     expect(page).to have_content 'E-mail não pode ficar em branco'
   end
 
-  it 'com dado exclusivo que já está em uso' do 
-    login_as(User.last)
+  it 'com dado exclusivo que já está em uso' do
+    Supplier.create!(corporate_name: 'ACME LTDA', brand_name: 'ACME', registration_number: '34472163000102',
+                     full_address: 'Avenida das Palmas, 100', city: 'Bauru', state: 'SP', email: 'contato@acme.com')
+    user = User.create!(name: 'Lucia', email: 'lucia@email.com', password: 'pass1234')
+    login_as(user)
     visit new_supplier_path
     fill_in 'CNPJ', with: '34472163000102'
     click_on 'Criar Fornecedor'
@@ -66,7 +72,8 @@ describe 'Usuário cadastra um fornecedor' do
   end
 
   it 'com dados inválidos' do 
-    login_as(User.last)
+    user = User.create!(name: 'Lucia', email: 'lucia@email.com', password: 'pass1234')
+    login_as(user)
     visit new_supplier_path
     fill_in 'CNPJ', with: '344721'
     fill_in 'E-mail', with: 'vendasspark.com.br'

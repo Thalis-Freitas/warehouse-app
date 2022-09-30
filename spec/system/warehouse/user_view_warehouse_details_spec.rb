@@ -2,7 +2,12 @@ require 'rails_helper'
 
 describe 'Usuário vê detalhes de um galpão' do
   it 'e vê informações adicionais' do 
-    login_as(User.last)
+    Warehouse.create!(name: 'Aeroporto SP', code: 'GRU', city: 'Guarulhos', area: '100000',
+                      address: 'Avenida do Aeroporto, 1000', zip_code: '15000-000',
+                      description: 'Galpão destinado para cargas internacionais')
+    user = User.create!(name: 'Lucia', email: 'lucia@email.com', password: 'pass1234')
+
+    login_as(user)
     visit root_path
     click_on 'Aeroporto SP'
 
@@ -15,10 +20,15 @@ describe 'Usuário vê detalhes de um galpão' do
   end
 
   it 'e volta para a tela inicial' do 
-    login_as(User.last)
+    Warehouse.create!(name: 'Aeroporto SP', code: 'GRU', city: 'Guarulhos', area: '100000',
+                      address: 'Avenida do Aeroporto, 1000', zip_code: '15000-000',
+                      description: 'Galpão destinado para cargas internacionais')
+    user = User.create!(name: 'Lucia', email: 'lucia@email.com', password: 'pass1234')
+
+    login_as(user)
     visit root_path
     click_on 'Aeroporto SP'
-    click_on 'Voltar'
+    click_link 'Galpões & Estoque'
 
     expect(current_path).to eq root_path 
   end

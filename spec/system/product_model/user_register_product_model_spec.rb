@@ -6,8 +6,10 @@ describe 'Usuário cadastra modelo de produto' do
     expect(current_path).to eq new_user_session_path
   end
 
-  it 'a partir do menu' do 
-    login_as(User.last)
+  it 'a partir do menu' do
+    user = User.create!(name: 'José', email: 'jose@email.com', password: 'password')
+
+    login_as(user)
     visit root_path
     click_on 'Modelos de Produtos'
     click_on 'Cadastrar novo modelo'
@@ -22,7 +24,11 @@ describe 'Usuário cadastra modelo de produto' do
   end
 
   it 'com sucesso' do
-    login_as(User.last)
+    Supplier.create!(corporate_name: 'ACME LTDA', brand_name: 'ACME', registration_number: '34472163000102',
+                     full_address: 'Avenida das Palmas, 100', city: 'Bauru', state: 'SP', email: 'contato@acme.com')
+    user = User.create!(name: 'José', email: 'jose@email.com', password: 'password')
+    
+    login_as(user)
     visit new_product_model_path
     fill_in 'Nome', with: 'Smartphone 07'
     fill_in 'Peso', with: 300
@@ -42,7 +48,9 @@ describe 'Usuário cadastra modelo de produto' do
   end
 
   it 'com dados incompletos' do 
-    login_as(User.last)
+    user = User.create!(name: 'José', email: 'jose@email.com', password: 'password')
+    
+    login_as(user)
     visit new_product_model_path
     fill_in 'Nome', with: ''
     fill_in 'SKU', with: ''
@@ -58,7 +66,14 @@ describe 'Usuário cadastra modelo de produto' do
   end
 
   it 'com dado exclusivo que já está em uso' do 
-    login_as(User.last)
+    supplier = Supplier.create!(brand_name: 'Samsung', corporate_name: 'Samsung Eletrônicos LTDA',
+                                registration_number: '06548763000134', full_address: 'Av Nacoes Unidas 999', 
+                                city: 'São Paulo', state: 'SP', email: 'sac@samsung.com.br')
+    ProductModel.create!(name: 'TV 40', weight: 6300, width: 101, height: 49, depth: 8,
+                         sku: 'TV4000-SAMSU-XPBA760', supplier: supplier)
+    user = User.create!(name: 'José', email: 'jose@email.com', password: 'password')
+    
+    login_as(user)
     visit new_product_model_path
     fill_in 'Nome', with: 'TV 40'
     fill_in 'SKU', with: 'TV4000-SAMSU-XPBA760'
@@ -69,7 +84,9 @@ describe 'Usuário cadastra modelo de produto' do
   end
 
   it 'com dados inválidos' do 
-    login_as(User.last)
+    user = User.create!(name: 'José', email: 'jose@email.com', password: 'password')
+    
+    login_as(user)
     visit new_product_model_path
     fill_in 'SKU', with: 'TV4'
     fill_in 'Peso', with: 0

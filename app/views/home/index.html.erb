@@ -1,5 +1,5 @@
 <section id="warehouses">
-  <h2>Galpões</h2>
+  <h2><%= Warehouse.model_name.human %></h2>
   <div>
   <%= link_to 'Cadastrar Galpão', new_warehouse_path %>
   </div>
@@ -9,9 +9,9 @@
       <% @warehouses.each do |w| %>
         <h3><%= link_to w.name, warehouse_path(w) %></h3>
         <dl>
-          <dt>Código: </dt><dd><%= w.code %></dd>
-          <dt>Cidade: </dt><dd><%= w.city %></dd>
-          <dt>Área: </dt><dd><%= "#{w.area} m²" %></dd>
+          <dt><%= Warehouse.human_attribute_name(:code) %>: </dt><dd><%= w.code %></dd>
+          <dt><%= Warehouse.human_attribute_name(:city) %>: </dt><dd><%= w.city %></dd>
+          <dt><%= Warehouse.human_attribute_name(:area) %>: </dt><dd><%= "#{w.area} m²" %></dd>
         </dl>
       <% end %>
     </div>

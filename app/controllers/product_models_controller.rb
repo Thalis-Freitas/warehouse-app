@@ -9,7 +9,7 @@ class ProductModelsController < ApplicationController
 
   def new
     @product_model = ProductModel.new
-    @suppliers = Supplier.all
+    @suppliers = Supplier.order(:brand_name)
   end
 
   def create

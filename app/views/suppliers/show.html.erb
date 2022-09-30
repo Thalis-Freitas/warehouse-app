@@ -1,4 +1,4 @@
-<h2>Fornecedor <%= @supplier.brand_name %></h2>
+<h2><%= "#{Supplier.model_name.human} #{@supplier.brand_name}" %></h2>
 <h3><%= @supplier.corporate_name %></h3>
 
 <dl>
@@ -6,7 +6,7 @@
   <dd><%= @supplier.registration_number %></dd>
   <dt>Endereço:</dt>
   <dd><%= @supplier.full_address %> - <%= @supplier.city %> - <%= @supplier.state %></dd>
-  <dt>E-mail:</dt>
+  <dt><%= Supplier.human_attribute_name(:email)%>: </dt>
   <dd><%= @supplier.email %></dd>
 </dl>
 
@@ -19,15 +19,11 @@
   <ul>
     <% @product_models.each do |m| %>
       <p><b><%= m.name %></b></p>
-      <li>SKU: <%= m.sku %></li>
+      <li><%= "#{ProductModel.human_attribute_name(:sku)}: #{m.sku}" %></li>
       <li>Dimensões: <%= "#{m.height}cm x #{m.width}cm x #{m.depth}cm" %></li>
-      <li>Peso: <%= m.weight %>g</li>
+      <li><%= "#{ProductModel.human_attribute_name(:weight)}: #{m.weight}g" %></li>
     <% end %>
   </ul>
 <% else %> 
   <h3>Nenhum modelo de produto cadastrado para este fornecedor</h3>
 <% end %>
-
-<div>
-  <%= link_to 'Voltar', root_path %>
-</div>

@@ -7,9 +7,13 @@ Warehouse.create!(name: 'Aeroporto SP', code: 'GRU', city: 'Guarulhos', area: '1
                   address: 'Avenida do Aeroporto, 1000', zip_code: '15000-000',
                   description: 'Galpão destinado para cargas internacionais')
 
+Warehouse.create!(name: 'Armazém SSA', code: 'SSA', city: 'Salvador', area: '90000',
+                 address: 'Avenida do Aeroporto, 200', zip_code: '32100-000',
+                 description: 'Galpão destinado para estoque de cargas')
+
 supplier = Supplier.create!(brand_name: 'Samsung', corporate_name: 'Samsung Eletrônicos LTDA',
-                 registration_number: '06548763000134', full_address: 'Av Nacoes Unidas 999', 
-                 city: 'São Paulo', state: 'SP', email: 'sac@samsung.com.br')
+                            registration_number: '06548763000134', full_address: 'Av Nacoes Unidas 999', 
+                            city: 'São Paulo', state: 'SP', email: 'sac@samsung.com.br')
 
 Supplier.create!(corporate_name: 'ACME LTDA', brand_name: 'ACME', registration_number: '34472163000102',
                  full_address: 'Avenida das Palmas, 100', city: 'Bauru', state: 'SP', email: 'contato@acme.com')
@@ -21,3 +25,4 @@ ProductModel.create!(name: 'Notebook 05', weight: 1800, width: 22, height: 38, d
                      sku: 'NOTE05-SAMSU-FL703DT', supplier: supplier)
 
 User.create!(name: 'José', email: 'jose@email.com', password: 'password')
+User.create!(name: 'Lucia', email: 'lucia@email.com', password: 'pass1234')

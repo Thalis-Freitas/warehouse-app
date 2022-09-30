@@ -2,7 +2,11 @@ require 'rails_helper'
 
 describe 'Usuário vê detalhes de um forcenedor' do
   it 'e vê informações adicionais' do 
-    login_as(User.last)
+    Supplier.create!(corporate_name: 'ACME LTDA', brand_name: 'ACME', registration_number: '34472163000102',
+                     full_address: 'Avenida das Palmas, 100', city: 'Bauru', state: 'SP', email: 'contato@acme.com')
+    user = User.create!(name: 'Lucia', email: 'lucia@email.com', password: 'pass1234')
+
+    login_as(user)
     visit root_path
     click_on 'Fornecedores'
     click_on 'ACME'
@@ -14,10 +18,14 @@ describe 'Usuário vê detalhes de um forcenedor' do
   end
 
   it 'e volta para a tela inicial' do 
-    login_as(User.last)
+    Supplier.create!(corporate_name: 'ACME LTDA', brand_name: 'ACME', registration_number: '34472163000102',
+                     full_address: 'Avenida das Palmas, 100', city: 'Bauru', state: 'SP', email: 'contato@acme.com')
+    user = User.create!(name: 'Lucia', email: 'lucia@email.com', password: 'pass1234')
+    
+    login_as(user)
     visit suppliers_path
     click_on 'ACME'
-    click_on 'Voltar'
+    click_link 'Galpões & Estoque'
 
     expect(current_path).to eq root_path 
   end

@@ -1,6 +1,6 @@
 namespace :product_model do
   desc "Popular a tabela product_models"
-  if Rails.env.development? || Rails.env.test?
+  if Rails.env.development?
     task set_product_model: :environment do
       supplier = Supplier.create!(brand_name: 'Samsung', corporate_name: 'Samsung Eletrônicos LTDA',
                                   registration_number: '06548763000134', full_address: 'Av Nacoes Unidas 999', 

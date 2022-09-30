@@ -1,7 +1,7 @@
 pt-BR:
   activerecord:
     models:
-      warehouse: 'Galpão'
+      warehouse: Galpão
     attributes:
       warehouse:
         name: 'Nome'
