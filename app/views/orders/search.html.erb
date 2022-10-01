@@ -1,0 +1,16 @@
+<h2>Resultados da Busca por <%= @code %> </h2>
+<% if @orders.count == 0 %>
+  <p><%= t(:none).capitalize %> <%= Order.model_name.human.downcase %> <%= t(:found, count: 1) %> </p>
+<% else %>
+  <p><%= @orders.count %> <%= Order.model_name.human(count: @orders.count).downcase %> <%= t(:found, count: @orders.count) %> </p>
+  <% @orders.each do |order| %>
+    <dl>
+      <dt><%= Order.human_attribute_name(:code)%>:</dt>
+      <dd><%= order.code %></dd>
+      <dt><%= Order.human_attribute_name(:warehouse)%>:</dt>
+      <dd><%= order.warehouse.full_description %></dd>
+      <dt><%= Order.human_attribute_name(:supplier)%>:</dt>
+      <dd><%= order.supplier.corporate_name %></dd>
+    </dl>
+  <% end %>
+<% end %>

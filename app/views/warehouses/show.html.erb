@@ -4,7 +4,7 @@
   <p><strong><%= Warehouse.human_attribute_name(:name) %>: </strong><%= @warehouse.name %></p>
   <p><strong><%= Warehouse.human_attribute_name(:city) %>: </strong><%= @warehouse.city %></p>
   <p><strong><%= Warehouse.human_attribute_name(:area) %>: </strong><%= "#{@warehouse.area} m²" %></p>
-  <p><strong><%= Warehouse.human_attribute_name(:address) %>: </strong><%= @warehouse.address %> <strong>CEP: </strong><%= @warehouse.zip_code %></p>
+  <p><strong><%= Warehouse.human_attribute_name(:address) %>: </strong><%= @warehouse.address %> <strong><%= Warehouse.human_attribute_name(:zip_code) %>:</strong> <%= @warehouse.zip_code %></p>
 </div>
 <div>
   <%= link_to 'Editar', edit_warehouse_path(@warehouse) %>

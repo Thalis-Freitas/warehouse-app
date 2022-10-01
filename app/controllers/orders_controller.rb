@@ -12,6 +12,8 @@ class OrdersController < ApplicationController
     if @order.save 
       redirect_to @order, notice: 'Pedido registrado com sucesso'
     else
+      @warehouses = Warehouse.order(:name)
+      @suppliers = Supplier.order(:corporate_name)
       flash.now[:alert] = 'Não foi possível cadastrar o pedido'
       render :new
     end
@@ -19,5 +21,10 @@ class OrdersController < ApplicationController
 
   def show
     @order = Order.find(params[:id])
+  end
+
+  def search
+    @code = params[:query]
+    @orders = Order.where("code LIKE ?", "%#{@code}%")
   end
 end

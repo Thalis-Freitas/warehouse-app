@@ -3,7 +3,6 @@ class Order < ApplicationRecord
   belongs_to :warehouse
   belongs_to :supplier
   belongs_to :user
-  # validates :estimated_delivery_date, comparison: { greater_than: Date.today }
   validate :estimated_delivery_date_is_future
 
   validates :code, :estimated_delivery_date, presence: true

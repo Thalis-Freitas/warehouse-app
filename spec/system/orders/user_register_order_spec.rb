@@ -25,7 +25,7 @@ describe 'Usuário cadastra um pedido' do
     end
     select 'GRU | Aeroporto SP', from: 'Galpão Destino'
     select 'ACME LTDA | SP', from: 'Fornecedor'
-    fill_in 'Previsão de Entrega', type: 'date', with: '22/12/2030'
+    fill_in 'Previsão de Entrega', type: 'date', with: Date.tomorrow
     click_on 'Criar Pedido'
 
     expect(page).to have_content 'Pedido ABC1234567'
@@ -33,7 +33,7 @@ describe 'Usuário cadastra um pedido' do
     expect(page).to have_content 'Galpão Destino: GRU | Aeroporto SP'
     expect(page).to have_content 'Fornecedor: ACME LTDA | SP'
     expect(page).to have_content 'Usuário Responsável: Lucas <lucas@email.com>'
-    expect(page).to have_content 'Previsão de Entrega: 22/12/2030'
+    expect(page).to have_content "Previsão de Entrega: #{I18n.l(Date.tomorrow)}"
     expect(page).not_to have_content 'Armazém SSA'
     expect(page).not_to have_content 'Samsung Eletrônicos LTDA'
   end

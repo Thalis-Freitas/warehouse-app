@@ -35,8 +35,39 @@ RSpec.describe Order, type: :model do
                                   full_address: 'Rua da praça, 150', city: 'FSA', state: 'BA', email: 'magalhaes@moveis.com')
       user = User.create!(name: 'Marina', email: 'mari@email.com', password: 'password')
       order = Order.new(warehouse: warehouse, supplier: supplier, user: user,
-                        estimated_delivery_date: '2028-11-02')
+                        estimated_delivery_date: 1.week.from_now)
       expect(order.valid?).to be true
+    end
+
+    it 'deve pertencer a um galpão' do
+      supplier = Supplier.create!(corporate_name: 'Móveis Magalhães', brand_name: 'Maga Móveis', registration_number: '98836472000184',
+                                  full_address: 'Rua da praça, 150', city: 'FSA', state: 'BA', email: 'magalhaes@moveis.com')
+      user = User.create!(name: 'Marina', email: 'mari@email.com', password: 'password')
+      order = Order.new(supplier: supplier, user: user, estimated_delivery_date: 1.week.from_now)
+      order.valid?
+      expect(order.errors.include? :warehouse).to be true
+      expect(order.errors[:warehouse]).to include 'é obrigatório(a)'
+    end
+
+    it 'deve pertencer a um fornecedor' do
+      warehouse = Warehouse.create!(name: 'Galpão da Avenida', code: 'POA', city: 'Porto Alegre', area: '60000',
+                                    address: 'Avenida das Rosas, 10', zip_code: '52700-000', description: 'Galpão')
+      user = User.create!(name: 'Marina', email: 'mari@email.com', password: 'password')
+      order = Order.new(warehouse: warehouse, user: user, estimated_delivery_date: 1.week.from_now)
+      order.valid?
+      expect(order.errors.include? :supplier).to be true
+      expect(order.errors[:supplier]).to include 'é obrigatório(a)'
+    end
+
+    it 'deve pertencer a um usuário' do
+      warehouse = Warehouse.create!(name: 'Galpão da Avenida', code: 'POA', city: 'Porto Alegre', area: '60000',
+                                    address: 'Avenida das Rosas, 10', zip_code: '52700-000', description: 'Galpão')
+      supplier = Supplier.create!(corporate_name: 'Móveis Magalhães', brand_name: 'Maga Móveis', registration_number: '98836472000184',
+                                  full_address: 'Rua da praça, 150', city: 'FSA', state: 'BA', email: 'magalhaes@moveis.com')
+      order = Order.new(warehouse: warehouse, supplier: supplier, estimated_delivery_date: 1.week.from_now)
+      order.valid?
+      expect(order.errors.include? :user).to be true
+      expect(order.errors[:user]).to include 'é obrigatório(a)'
     end
   end
 
@@ -49,7 +80,7 @@ RSpec.describe Order, type: :model do
                                   full_address: 'Rua da praça, 150', city: 'FSA', state: 'BA', email: 'magalhaes@moveis.com')  
       user = User.create!(name: 'Marina', email: 'mari@email.com', password: 'password')
       order = Order.new(warehouse: warehouse, supplier: supplier, user: user,
-                        estimated_delivery_date: '2028-11-02')
+                        estimated_delivery_date: Date.tomorrow)
       order.save!
       expect(order.code).not_to be_empty
       expect(order.code.length).to eq 10
@@ -63,9 +94,9 @@ RSpec.describe Order, type: :model do
                                     full_address: 'Rua da praça, 150', city: 'FSA', state: 'BA', email: 'magalhaes@moveis.com')
       user = User.create!(name: 'Marina', email: 'mari@email.com', password: 'password')
       order = Order.create!(warehouse: warehouse, supplier: supplier, user: user,
-                          estimated_delivery_date: '2028-11-02')
+                          estimated_delivery_date: 1.day.from_now)
       second_order = Order.new(warehouse: warehouse, supplier: supplier, user: user,
-                          estimated_delivery_date: '2029-05-12')
+                          estimated_delivery_date: 1.month.from_now)
       second_order.save!
       expect(second_order.code).not_to eq order.code
     end
