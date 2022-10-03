@@ -26,7 +26,7 @@ describe 'Usuário cadastra um pedido' do
     select 'GRU | Aeroporto SP', from: 'Galpão Destino'
     select 'ACME LTDA | SP', from: 'Fornecedor'
     fill_in 'Previsão de Entrega', type: 'date', with: Date.tomorrow
-    click_on 'Criar Pedido'
+    click_on 'Salvar'
 
     expect(page).to have_content 'Pedido ABC1234567'
     expect(page).to have_content 'Pedido registrado com sucesso'

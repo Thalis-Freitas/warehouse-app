@@ -103,6 +103,15 @@ RSpec.describe Warehouse, type: :model do
         expect(warehouse.errors[:code]).to include 'não é válido'
       end
     end
+
+    context 'comparison' do
+      it 'área deve ser maior que 0' do
+        warehouse = Warehouse.new(area: '-5')
+        warehouse.valid?
+        expect(warehouse.errors.include? :area).to be true
+        expect(warehouse.errors[:area]).to include 'deve ser maior que 0'
+      end
+    end
   end
 
   describe '#full_description' do
