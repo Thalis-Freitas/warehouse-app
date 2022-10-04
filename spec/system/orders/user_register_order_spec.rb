@@ -34,6 +34,7 @@ describe 'Usuário cadastra um pedido' do
     expect(page).to have_content 'Fornecedor: ACME LTDA | SP'
     expect(page).to have_content 'Usuário Responsável: Lucas <lucas@email.com>'
     expect(page).to have_content "Previsão de Entrega: #{I18n.l(Date.tomorrow)}"
+    expect(page).to have_content 'Situação do Pedido: Pendente'
     expect(page).not_to have_content 'Armazém SSA'
     expect(page).not_to have_content 'Samsung Eletrônicos LTDA'
   end

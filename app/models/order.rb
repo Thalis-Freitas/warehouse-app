@@ -3,8 +3,9 @@ class Order < ApplicationRecord
   belongs_to :warehouse
   belongs_to :supplier
   belongs_to :user
-  validate :estimated_delivery_date_is_future
+  enum status: {pending: 0, delivered: 5, canceled: 9}
 
+  validate :estimated_delivery_date_is_future
   validates :code, :estimated_delivery_date, presence: true
 
   def generate_code
