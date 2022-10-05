@@ -1,4 +1,5 @@
 pt-BR:
+  order/status:
   pending: 'Pendente'
   canceled: 'Cancelado'
   delivered: 'Entregue'

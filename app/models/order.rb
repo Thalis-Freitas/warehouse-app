@@ -3,6 +3,8 @@ class Order < ApplicationRecord
   belongs_to :warehouse
   belongs_to :supplier
   belongs_to :user
+  has_many :order_items
+  has_many :orders, through: :order_items
   enum status: {pending: 0, delivered: 5, canceled: 9}
 
   validate :estimated_delivery_date_is_future

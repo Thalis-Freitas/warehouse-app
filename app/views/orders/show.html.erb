@@ -13,6 +13,13 @@
   <dd><%= I18n.t(@order.status) %></dd>
 </dl>
 
+<h3>Itens do Pedido</h3>
+<%= link_to 'Adicionar Item', new_order_order_item_path(order_id: @order.id) %>
+<% @order.order_items.each do |item| %>
+  <ul>
+    <li><%= "#{item.quantity} x #{item.product_model.name}"%></li> 
+  </ul>
+<% end %>
 <% if @order.pending? %>
   <%= button_to 'Entregue', delivered_order_path(@order.id) %>
   <%= button_to 'Cancelado', canceled_order_path(@order.id) %>
