@@ -29,7 +29,9 @@ class OrdersController < ApplicationController
 
   def search
     @code = params[:query]
-    @orders = Order.where("code LIKE ?", "%#{@code}%")
+    if @code.strip != ""
+      @orders = Order.where("code LIKE ?", "%#{@code}%")
+    end
   end
 
   def edit
@@ -44,6 +46,7 @@ class OrdersController < ApplicationController
 
   def delivered
     @order.delivered!
+    @order.create_stock_when_delivered
     redirect_to @order
   end
 

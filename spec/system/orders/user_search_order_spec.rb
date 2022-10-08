@@ -81,6 +81,15 @@ describe 'Usuário busca por um pedido' do
     expect(page).not_to have_content'SSA0000000'
     expect(page).not_to have_content 'Galpão Destino: SSA | Armazém BA'
   end
+
+  it 'sem preencher o campo' do 
+    user = User.create!(name: 'Lucas', email: 'lucas@email.com', password: 'password')
+    login_as(user)
+    visit root_path
+    fill_in 'Buscar Pedido', with: ''
+    click_on 'Buscar'
+    expect(page).to have_content 'É necessário preencher o campo para realizar a busca'
+  end
   
   it 'e não encontra nenhum pedido' do
     user = User.create!(name: 'Lucas', email: 'lucas@email.com', password: 'password')

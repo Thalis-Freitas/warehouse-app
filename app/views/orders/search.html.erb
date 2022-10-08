@@ -1,5 +1,7 @@
 <h2>Resultados da Busca por <%= @code %> </h2>
-<% if @orders.count == 0 %>
+<% if @orders.nil? %>
+  <p>É necessário preencher o campo para realizar a busca</p>
+<% elsif @orders.count == 0 %>
   <p><%= t(:none).capitalize %> <%= Order.model_name.human.downcase %> <%= t(:found, count: 1) %> </p>
 <% else %>
   <p><%= @orders.count %> <%= Order.model_name.human(count: @orders.count).downcase %> <%= t(:found, count: @orders.count) %> </p>

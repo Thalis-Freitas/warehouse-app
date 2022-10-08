@@ -100,5 +100,40 @@ RSpec.describe Order, type: :model do
       second_order.save!
       expect(second_order.code).not_to eq order.code
     end
+
+    it 'e não deve ser modificado' do
+      warehouse = Warehouse.create!(name: 'Galpão da Avenida', code: 'POA', city: 'Porto Alegre', area: '60000',
+                                    address: 'Avenida das Rosas, 10', zip_code: '52700-000',
+                                    description: 'Galpão')
+      supplier = Supplier.create!(corporate_name: 'Móveis Magalhães', brand_name: 'Maga Móveis', registration_number: '98836472000184',
+                                  full_address: 'Rua da praça, 150', city: 'FSA', state: 'BA', email: 'magalhaes@moveis.com')  
+      user = User.create!(name: 'Marina', email: 'mari@email.com', password: 'password')
+      order = Order.create!(warehouse: warehouse, supplier: supplier, user: user,
+                            estimated_delivery_date: Date.tomorrow)
+      original_code = order.code 
+      order.update!(estimated_delivery_date: 1.week.from_now)
+      expect(order.code).to eq original_code
+    end
+  end
+
+  describe '#create_stock_when_delivered' do
+    it 'cria produtos em estoque quando o pedido for entregue' do 
+      warehouse = Warehouse.create!(name: 'Galpão da Avenida', code: 'POA', city: 'Porto Alegre', area: '60000',
+                                    address: 'Avenida das Rosas, 10', zip_code: '52700-000',
+                                    description: 'Galpão')
+      supplier = Supplier.create!(corporate_name: 'Móveis Magalhães', brand_name: 'Maga Móveis', registration_number: '98836472000184',
+                                  full_address: 'Rua da praça, 150', city: 'FSA', state: 'BA', email: 'magalhaes@moveis.com')
+      user = User.create!(name: 'Marina', email: 'mari@email.com', password: 'password')
+      order = Order.create!(warehouse: warehouse, supplier: supplier, user: user,
+                            estimated_delivery_date: 1.day.from_now)
+      product = ProductModel.create!(name: 'TV 40', weight: 6300, width: 101, height: 49, depth: 8,
+                                     sku: 'TV4000-SAMSU-XPBA760', supplier: supplier)
+      OrderItem.create!(order: order, product_model: product, quantity: 20)
+
+      order.create_stock_when_delivered
+
+      expect(StockProduct.count).to eq 20
+      expect(StockProduct.where(product_model: product, warehouse: warehouse).count).to eq 20
+    end
   end
 end
