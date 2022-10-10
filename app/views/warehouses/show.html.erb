@@ -6,6 +6,14 @@
   <p><strong><%= Warehouse.human_attribute_name(:area) %>: </strong><%= "#{@warehouse.area} m²" %></p>
   <p><strong><%= Warehouse.human_attribute_name(:address) %>: </strong><%= @warehouse.address %> <strong><%= Warehouse.human_attribute_name(:zip_code) %>:</strong> <%= @warehouse.zip_code %></p>
 </div>
+
+<div>
+  <h3>Itens em Estoque</h3>
+  <% @stocks.each_pair do |product_model, quantity| %>
+    <%= quantity %> x <%= product_model.sku %>
+  <% end %>
+</div>
+
 <div>
   <%= link_to 'Editar', edit_warehouse_path(@warehouse) %>
   <%= button_to 'Remover', warehouse_path(@warehouse), method: :delete %>

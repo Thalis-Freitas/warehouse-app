@@ -4,6 +4,7 @@ class WarehousesController < ApplicationController
   def show
     formatted_zip_code @warehouse
     @warehouse[:code].upcase!
+    @stocks = @warehouse.stock_products.group(:product_model).count
   end
 
   def new
