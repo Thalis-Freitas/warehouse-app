@@ -4,9 +4,10 @@ class WarehousesController < ApplicationController
   def show
     formatted_zip_code @warehouse
     @warehouse[:code].upcase!
-    @stocks = @warehouse.stock_products.group(:product_model).count
+    @stocks = @warehouse.stock_products.where.missing(:stock_product_destination).group(:product_model).count
+    @product_models = @warehouse.set_product_models
   end
-
+  
   def new
     @warehouse = Warehouse.new
   end

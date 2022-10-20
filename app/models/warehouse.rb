@@ -9,4 +9,11 @@ class Warehouse < ApplicationRecord
   def full_description
     "#{code} | #{name}"
   end
+
+  def set_product_models
+    all_models_in_stock = self.stock_products.map do |stock_product|
+      stock_product.product_model if stock_product.available?
+    end
+    all_models_in_stock.uniq.compact
+  end
 end

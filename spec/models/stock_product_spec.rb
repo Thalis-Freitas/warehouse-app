@@ -40,4 +40,39 @@ RSpec.describe StockProduct, type: :model do
       expect(stock_product.serial_number).to eq original_serial_number
     end
   end
+
+  describe '#available?' do 
+    it 'true se não tiver destino' do 
+      warehouse = Warehouse.create!(name: 'Galpão da Avenida', code: 'POA', city: 'Porto Alegre', area: '60000',
+                                    address: 'Avenida das Rosas, 10', zip_code: '52700-000',
+                                    description: 'Galpão')
+      supplier = Supplier.create!(corporate_name: 'Móveis Magalhães', brand_name: 'Maga Móveis', registration_number: '98836472000184',
+                                  full_address: 'Rua da praça, 150', city: 'FSA', state: 'BA', email: 'magalhaes@moveis.com')  
+      user = User.create!(name: 'Marina', email: 'mari@email.com', password: 'password')
+      order = Order.create!(warehouse: warehouse, supplier: supplier, user: user,
+                        estimated_delivery_date: Date.tomorrow, status: :delivered)
+      product = ProductModel.create!(name: 'Notebook 05', weight: 1800, width: 22, height: 38, depth: 2,
+                                     sku: 'NOTE05-SAMSU-FL703DT', supplier: supplier)
+      stock_product = StockProduct.create!(order: order, warehouse: warehouse, product_model: product)
+
+      expect(stock_product.available?).to eq true
+    end
+
+    it 'false se tiver destino' do 
+      warehouse = Warehouse.create!(name: 'Galpão da Avenida', code: 'POA', city: 'Porto Alegre', area: '60000',
+                                    address: 'Avenida das Rosas, 10', zip_code: '52700-000',
+                                    description: 'Galpão')
+      supplier = Supplier.create!(corporate_name: 'Móveis Magalhães', brand_name: 'Maga Móveis', registration_number: '98836472000184',
+                                  full_address: 'Rua da praça, 150', city: 'FSA', state: 'BA', email: 'magalhaes@moveis.com')  
+      user = User.create!(name: 'Marina', email: 'mari@email.com', password: 'password')
+      order = Order.create!(warehouse: warehouse, supplier: supplier, user: user,
+                        estimated_delivery_date: Date.tomorrow, status: :delivered)
+      product = ProductModel.create!(name: 'Notebook 05', weight: 1800, width: 22, height: 38, depth: 2,
+                                     sku: 'NOTE05-SAMSU-FL703DT', supplier: supplier)
+      stock_product = StockProduct.create!(order: order, warehouse: warehouse, product_model: product)
+      stock_product.create_stock_product_destination!(recipient: 'João', address: 'Rua das árvores, 1000')
+
+      expect(stock_product.available?).to eq false
+    end
+  end
 end
