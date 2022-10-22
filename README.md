@@ -6,4 +6,4 @@ Projeto criado para acompanhar as aulas do TREINADEV, uma abordagem prática com
 
 * Versão Ruby: 3.1.2
 
-* Banco de dados populado com seeds, necessário executar o comando 'rails db:seeds'
+* Banco de dados populado com seeds, necessário executar o comando 'rails db:seed'
